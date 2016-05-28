@@ -1,26 +1,26 @@
-package com.hiddentao.cordova.filepath;
+package eu.droidit.filepath;
 
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.List;
 import java.io.File;
+import java.util.List;
 
 public class FilePath extends CordovaPlugin {
 
@@ -33,65 +33,6 @@ public class FilePath extends CordovaPlugin {
 
     private static final int GET_CLOUD_PATH_ERROR_CODE = 1;
     private static final String GET_CLOUD_PATH_ERROR_ID = "cloud";
-
-
-    public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
-        super.initialize(cordova, webView);
-    }
-
-    /**
-     * Executes the request and returns PluginResult.
-     *
-     * @param action        The action to execute.
-     * @param args          JSONArry of arguments for the plugin.
-     * @param callbackContext The callback context through which to return stuff to caller.
-     * @return              A PluginResult object with a status and message.
-     */
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        JSONObject resultObj = new JSONObject();
-
-        if (action.equals("resolveNativePath")) {
-             /* content:///... */
-            String uriStr = args.getString(0);
-            Uri pvUrl = Uri.parse(uriStr);
-
-            Log.d(TAG, "URI: " + uriStr);
-
-            Context appContext = this.cordova.getActivity().getApplicationContext();
-            String filePath = getPath(appContext, pvUrl);
-
-            //check result; send error/success callback
-            if (filePath == GET_PATH_ERROR_ID) {
-                resultObj.put("code", GET_PATH_ERROR_CODE);
-                resultObj.put("message", "Unable to resolve filesystem path.");
-
-                callbackContext.error(resultObj);
-            }
-            else if (filePath.equals(GET_CLOUD_PATH_ERROR_ID)) {
-                resultObj.put("code", GET_CLOUD_PATH_ERROR_CODE);
-                resultObj.put("message", "Files from cloud cannot be resolved to filesystem, download is required.");
-                
-                callbackContext.error(resultObj);
-            }
-            else {
-                Log.d(TAG, "Filepath: " + filePath);
-
-                callbackContext.success("file://" + filePath);
-            }
-
-            return true;
-        }
-        else {
-            resultObj.put("code", INVALID_ACTION_ERROR_CODE);
-            resultObj.put("message", "Invalid action.");
-            
-            callbackContext.error(resultObj);
-        }
-
-        return false;
-    }
-
 
     /**
      * @param uri The Uri to check.
@@ -145,7 +86,7 @@ public class FilePath extends CordovaPlugin {
      * @return The value of the _data column, which is typically a file path.
      */
     private static String getDataColumn(Context context, Uri uri, String selection,
-                                       String[] selectionArgs) {
+                                        String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
@@ -177,7 +118,7 @@ public class FilePath extends CordovaPlugin {
     private static String getContentFromSegments(List<String> segments) {
         String contentPath = "";
 
-        for(String item : segments) {
+        for (String item : segments) {
             if (item.startsWith("content://")) {
                 contentPath = item;
                 break;
@@ -219,7 +160,7 @@ public class FilePath extends CordovaPlugin {
                 return fullPath;
             }
         }
-    
+
         // Environment.isExternalStorageRemovable() is `true` for external and internal storage
         // so we cannot relay on it.
         //
@@ -253,12 +194,12 @@ public class FilePath extends CordovaPlugin {
 
         Log.d(TAG, "File - " +
                 "Authority: " + uri.getAuthority() +
-                        ", Fragment: " + uri.getFragment() +
-                        ", Port: " + uri.getPort() +
-                        ", Query: " + uri.getQuery() +
-                        ", Scheme: " + uri.getScheme() +
-                        ", Host: " + uri.getHost() +
-                        ", Segments: " + uri.getPathSegments().toString()
+                ", Fragment: " + uri.getFragment() +
+                ", Port: " + uri.getPort() +
+                ", Query: " + uri.getQuery() +
+                ", Scheme: " + uri.getScheme() +
+                ", Host: " + uri.getHost() +
+                ", Segments: " + uri.getPathSegments().toString()
         );
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -274,8 +215,7 @@ public class FilePath extends CordovaPlugin {
                 String fullPath = getPathFromExtSD(split);
                 if (fullPath != "") {
                     return fullPath;
-                }
-                else {
+                } else {
                     return null;
                 }
             }
@@ -304,13 +244,12 @@ public class FilePath extends CordovaPlugin {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
                 return getDataColumn(context, contentUri, selection, selectionArgs);
-            }
-            else if (isGoogleDriveUri(uri)) {
+            } else if (isGoogleDriveUri(uri)) {
                 return "cloud";
             }
         }
@@ -322,8 +261,7 @@ public class FilePath extends CordovaPlugin {
                 String contentPath = getContentFromSegments(uri.getPathSegments());
                 if (contentPath != "") {
                     return getPath(context, Uri.parse(contentPath));
-                }
-                else {
+                } else {
                     return null;
                 }
             }
@@ -336,5 +274,59 @@ public class FilePath extends CordovaPlugin {
         }
 
         return null;
+    }
+
+    public void initialize(CordovaInterface cordova, final CordovaWebView webView) {
+        super.initialize(cordova, webView);
+    }
+
+    /**
+     * Executes the request and returns PluginResult.
+     *
+     * @param action        The action to execute.
+     * @param args          JSONArry of arguments for the plugin.
+     * @param callbackContext The callback context through which to return stuff to caller.
+     * @return A PluginResult object with a status and message.
+     */
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        JSONObject resultObj = new JSONObject();
+
+        if (action.equals("resolveNativePath")) {
+             /* content:///... */
+            String uriStr = args.getString(0);
+            Uri pvUrl = Uri.parse(uriStr);
+
+            Log.d(TAG, "URI: " + uriStr);
+
+            Context appContext = this.cordova.getActivity().getApplicationContext();
+            String filePath = getPath(appContext, pvUrl);
+
+            //check result; send error/success callback
+            if (filePath == GET_PATH_ERROR_ID) {
+                resultObj.put("code", GET_PATH_ERROR_CODE);
+                resultObj.put("message", "Unable to resolve filesystem path.");
+
+                callbackContext.error(resultObj);
+            } else if (filePath.equals(GET_CLOUD_PATH_ERROR_ID)) {
+                resultObj.put("code", GET_CLOUD_PATH_ERROR_CODE);
+                resultObj.put("message", "Files from cloud cannot be resolved to filesystem, download is required.");
+
+                callbackContext.error(resultObj);
+            } else {
+                Log.d(TAG, "Filepath: " + filePath);
+
+                callbackContext.success("file://" + filePath);
+            }
+
+            return true;
+        } else {
+            resultObj.put("code", INVALID_ACTION_ERROR_CODE);
+            resultObj.put("message", "Invalid action.");
+
+            callbackContext.error(resultObj);
+        }
+
+        return false;
     }
 }
