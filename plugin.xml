@@ -16,40 +16,38 @@
   under the License.
 -->
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-xmlns:android="http://schemas.android.com/apk/res/android"
-           id="cordova-plugin-filepath"
-      version="1.0.2">
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-filepath-resolver"
+        version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>FilePath</name>
-    <description>Cordova filepath plugin</description>
+    <description>Cordova filepath resolver plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,file</keywords>
-    <repo>https://github.com/hiddentao/cordova-plugin-filepath.git</repo>
-    <issue>https://github.com/hiddentao/cordova-plugin-filepath/issues</issue>
+    <repo>https://github.com/gjoris/cordova-filepath-resolver.git</repo>
+    <issue>https://github.com/gjoris/cordova-filepath-resolver/issues</issue>
 
     <engines>
-        <engine name="cordova-android" version=">=3.1.0" /><!-- Uses CordovaResourceApi -->
+        <engine name="cordova-android" version=">=5.0.0" /><!-- Uses CordovaResourceApi and permission system -->
     </engines>
 
     <!-- android -->
     <platform name="android">
-        <js-module src="www/FilePath.js" name="FilePath">
+        <js-module name="FilePath" src="www/FilePath.js">
             <clobbers target="window.FilePath" />
         </js-module>
 
-        <config-file target="res/xml/config.xml" parent="/*">
+        <config-file parent="/*" target="res/xml/config.xml">
             <feature name="FilePath" >
-                <param name="android-package" value="com.hiddentao.cordova.filepath.FilePath"/>
+                <param name="android-package" value="eu.droidit.filepath.FilePath" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/*">
+        <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         </config-file>
 
-        <source-file src="src/android/FilePath.java" target-dir="src/com/hiddentao/cordova/filepath" />
+        <source-file src="src/eu/droidit/filepath/FilePath.java" target-dir="src/eu/droidit/filepath/FilePath.java" />
     </platform>
 
 </plugin>
