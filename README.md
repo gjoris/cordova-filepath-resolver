@@ -12,7 +12,7 @@ This version requires at least Cordova 5.0.0, and solves the permission issues i
 ## Installation
 
 ```bash
-$ cordova plugin add cordova-plugin-filepath
+$ cordova plugin add https://github.com/gjoris/cordova-filepath-resolver.git
 ```
 
 ## Supported Platforms
@@ -26,6 +26,14 @@ file path:
 
 ```js
 window.FilePath.resolveNativePath('content://...', successCallback, errorCallback);
+```
+
+##### AngularJS
+
+When using this with AngularJS (for instance, in Ionic), you can (also) retrieve a reference to the FilePath function via the $window object:
+
+```js
+$window['FilePath'].resolveNativePath('content://...', successCallback, errorCallback);
 ```
 
 ##### successCallback
