@@ -5,6 +5,10 @@ URIs and is based on code in the [aFileChooser](https://github.com/iPaulPro/aFil
 
 Original inspiration [from StackOverflow](http://stackoverflow.com/questions/20067508/get-real-path-from-uri-android-kitkat-new-storage-access-framework).
 
+Original version by [hiddentao](https://github.com/hiddentao/cordova-plugin-filepath). 
+
+This version requires at least Cordova 5.0.0, and solves the permission issues in Android 5.
+
 ## Installation
 
 ```bash
