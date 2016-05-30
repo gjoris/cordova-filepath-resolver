@@ -7,7 +7,7 @@ Original inspiration [from StackOverflow](http://stackoverflow.com/questions/200
 
 Original version by [hiddentao](https://github.com/hiddentao/cordova-plugin-filepath). 
 
-This version requires at least Cordova 5.0.0, and solves the permission issues in Android 6.
+This version requires at least Cordova 6.0.0, and solves the permission issues in Android 6.
 
 ## Installation
 
