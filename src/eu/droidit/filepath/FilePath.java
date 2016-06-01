@@ -1,6 +1,5 @@
 package eu.droidit.filepath;
 
-
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.pm.PackageManager;
