@@ -1,14 +1,18 @@
-# cordova-plugin-filepath
+# cordova-filepath-resolver
 
 This plugin allows you to resolve the native filesystem path for Android content 
 URIs and is based on code in the [aFileChooser](https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java) library.
 
 Original inspiration [from StackOverflow](http://stackoverflow.com/questions/20067508/get-real-path-from-uri-android-kitkat-new-storage-access-framework).
 
+Original version by [hiddentao](https://github.com/hiddentao/cordova-plugin-filepath). 
+
+This version requires at least Cordova 6.0.0, and solves the permission issues in Android 6.
+
 ## Installation
 
 ```bash
-$ cordova plugin add cordova-plugin-filepath
+$ cordova plugin add https://github.com/gjoris/cordova-filepath-resolver.git
 ```
 
 ## Supported Platforms
@@ -22,6 +26,14 @@ file path:
 
 ```js
 window.FilePath.resolveNativePath('content://...', successCallback, errorCallback);
+```
+
+##### AngularJS
+
+When using this with AngularJS (for instance, in Ionic), you can (also) retrieve a reference to the FilePath function via the $window object:
+
+```js
+$window['FilePath'].resolveNativePath('content://...', successCallback, errorCallback);
 ```
 
 ##### successCallback
