@@ -4,6 +4,10 @@
 
 ## File-based project format:
 *.iws
+*.iml
+
+local.properties
+lib/
 
 ## Plugin-specific files:
 
