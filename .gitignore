@@ -9,6 +9,9 @@ lib
 *.iws
 *.iml
 
+local.properties
+lib/
+
 ## Plugin-specific files:
 
 # IntelliJ

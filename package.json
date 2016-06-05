@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Cordova filepath plugin",
   "cordova": {
-    "id": "cordova-plugin-filepath",
+    "id": "cordova-filepath-resolver",
     "platforms": [
       "android"
     ]
