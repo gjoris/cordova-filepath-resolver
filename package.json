@@ -1,7 +1,7 @@
 {
-  "name": "cordova-plugin-filepath",
+  "name": "cordova-filepath-resolver",
   "version": "1.0.2",
-  "description": "Resolve native file paths from content URLs for Cordova platforms",
+  "description": "Cordova filepath plugin",
   "cordova": {
     "id": "cordova-plugin-filepath",
     "platforms": [
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hiddentao/cordova-plugin-filepath.git"
+    "url": "git+https://github.com/gjoris/cordova-filepath-resolver.git"
   },
   "keywords": [
     "cordova",
@@ -18,6 +18,16 @@
     "ecosystem:cordova",
     "cordova-android"
   ],
-  "author": "Ramesh Nair <ram@hiddentao.com>",
-  "license": "Apache 2.0"
+  "engines": [
+    {
+      "name": "cordova-android",
+      "version": ">=5.0.0"
+    }
+  ],
+  "author": "Geroen Joris <info@droidit.eu>",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/gjoris/cordova-filepath-resolver/issues"
+  },
+  "homepage": "https://github.com/gjoris/cordova-filepath-resolver#readme"
 }
