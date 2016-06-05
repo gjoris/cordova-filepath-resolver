@@ -12,7 +12,15 @@ This version requires at least Cordova 6.0.0, and solves the permission issues i
 ## Installation
 
 ```bash
-$ cordova plugin add https://github.com/gjoris/cordova-filepath-resolver.git
+$ cordova plugin add cordova-filepath-resolver
+```
+
+* Ionic
+
+For Ionic specifically, you can also use:
+
+```bash
+$ ionic plugin add cordova-filepath-resolver
 ```
 
 ## Supported Platforms
