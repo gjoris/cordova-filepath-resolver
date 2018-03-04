@@ -82,7 +82,7 @@ public class FilePath extends CordovaPlugin {
      * @return Whether the Uri authority is Google Drive.
      */
     private static boolean isGoogleDriveUri(Uri uri) {
-        return "com.google.android.apps.docs.storage".equals(uri.getAuthority());
+        return uri != null && uri.getAuthority() != null && uri.getAuthority().startsWith("com.google.android.apps.docs.storage");
     }
 
     /**
@@ -274,6 +274,10 @@ public class FilePath extends CordovaPlugin {
                 } else {
                     return null;
                 }
+            }
+
+            else if (isGoogleDriveUri(uri)) {
+                return "cloud";
             }
 
             return getDataColumn(context, uri, null, null);
