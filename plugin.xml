@@ -17,7 +17,7 @@
 -->
 
 <plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-filepath-resolver"
-    version="1.0.4" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+    version="1.0.5" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>FilePath</name>
     <description>Cordova filepath resolver plugin</description>
     <license>Apache 2.0</license>
